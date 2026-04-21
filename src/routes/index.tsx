@@ -165,7 +165,10 @@ function HomeScreen() {
             </h2>
             <span className="text-xs text-muted-foreground">{newReleases.length} novos</span>
           </div>
-          <div className="flex gap-3 overflow-x-auto no-scrollbar -mx-5 px-5">
+          <div
+            ref={releasesRef}
+            className="flex gap-3 overflow-x-auto no-scrollbar -mx-5 px-5 cursor-grab select-none"
+          >
             {loadingData
               ? Array.from({ length: 4 }).map((_, i) => (
                   <div key={i} className="glass shrink-0 w-44 h-60 rounded-2xl animate-pulse" />
