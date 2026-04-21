@@ -20,6 +20,60 @@ function HomeScreen() {
   const [recs, setRecs] = useState<RecommendedPerfume[]>([]);
   const [newReleases, setNewReleases] = useState<Perfume[]>([]);
   const [loadingData, setLoadingData] = useState(true);
+  const releasesRef = useRef<HTMLDivElement>(null);
+
+  // Habilita scroll horizontal via roda do mouse e arrastar (desktop)
+  useEffect(() => {
+    const el = releasesRef.current;
+    if (!el) return;
+
+    const onWheel = (e: WheelEvent) => {
+      // Se o gesto for predominantemente vertical, converte para horizontal
+      if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+        if (e.deltaY === 0) return;
+        e.preventDefault();
+        el.scrollBy({ left: e.deltaY, behavior: "auto" });
+      }
+    };
+
+    let isDown = false;
+    let startX = 0;
+    let startScroll = 0;
+
+    const onPointerDown = (e: PointerEvent) => {
+      // Só ativa drag para mouse — touch já tem scroll nativo
+      if (e.pointerType !== "mouse") return;
+      isDown = true;
+      startX = e.clientX;
+      startScroll = el.scrollLeft;
+      el.setPointerCapture(e.pointerId);
+      el.style.cursor = "grabbing";
+    };
+    const onPointerMove = (e: PointerEvent) => {
+      if (!isDown) return;
+      el.scrollLeft = startScroll - (e.clientX - startX);
+    };
+    const onPointerUp = (e: PointerEvent) => {
+      if (!isDown) return;
+      isDown = false;
+      el.releasePointerCapture(e.pointerId);
+      el.style.cursor = "";
+    };
+
+    el.addEventListener("wheel", onWheel, { passive: false });
+    el.addEventListener("pointerdown", onPointerDown);
+    el.addEventListener("pointermove", onPointerMove);
+    el.addEventListener("pointerup", onPointerUp);
+    el.addEventListener("pointercancel", onPointerUp);
+
+    return () => {
+      el.removeEventListener("wheel", onWheel);
+      el.removeEventListener("pointerdown", onPointerDown);
+      el.removeEventListener("pointermove", onPointerMove);
+      el.removeEventListener("pointerup", onPointerUp);
+      el.removeEventListener("pointercancel", onPointerUp);
+    };
+  }, [loadingData]);
 
   useEffect(() => {
     let cancel = false;
