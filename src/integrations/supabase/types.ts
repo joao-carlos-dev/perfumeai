@@ -14,7 +14,207 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      chat_messages: {
+        Row: {
+          content: string
+          created_at: string
+          id: string
+          perfume_ids: string[] | null
+          role: string
+          user_id: string
+        }
+        Insert: {
+          content: string
+          created_at?: string
+          id?: string
+          perfume_ids?: string[] | null
+          role: string
+          user_id: string
+        }
+        Update: {
+          content?: string
+          created_at?: string
+          id?: string
+          perfume_ids?: string[] | null
+          role?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      notes: {
+        Row: {
+          color: string
+          created_at: string
+          description: string | null
+          family: string
+          icon: string
+          id: string
+          name: string
+        }
+        Insert: {
+          color?: string
+          created_at?: string
+          description?: string | null
+          family: string
+          icon?: string
+          id?: string
+          name: string
+        }
+        Update: {
+          color?: string
+          created_at?: string
+          description?: string | null
+          family?: string
+          icon?: string
+          id?: string
+          name?: string
+        }
+        Relationships: []
+      }
+      perfume_notes: {
+        Row: {
+          id: string
+          intensity: number
+          note_id: string
+          note_type: string
+          perfume_id: string
+        }
+        Insert: {
+          id?: string
+          intensity?: number
+          note_id: string
+          note_type?: string
+          perfume_id: string
+        }
+        Update: {
+          id?: string
+          intensity?: number
+          note_id?: string
+          note_type?: string
+          perfume_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "perfume_notes_note_id_fkey"
+            columns: ["note_id"]
+            isOneToOne: false
+            referencedRelation: "notes"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "perfume_notes_perfume_id_fkey"
+            columns: ["perfume_id"]
+            isOneToOne: false
+            referencedRelation: "perfumes"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      perfumes: {
+        Row: {
+          brand: string
+          created_at: string
+          description: string | null
+          gender: string
+          id: string
+          image_url: string | null
+          is_new: boolean
+          name: string
+          popularity_score: number
+          price_range: string | null
+          year: number | null
+        }
+        Insert: {
+          brand: string
+          created_at?: string
+          description?: string | null
+          gender?: string
+          id?: string
+          image_url?: string | null
+          is_new?: boolean
+          name: string
+          popularity_score?: number
+          price_range?: string | null
+          year?: number | null
+        }
+        Update: {
+          brand?: string
+          created_at?: string
+          description?: string | null
+          gender?: string
+          id?: string
+          image_url?: string | null
+          is_new?: boolean
+          name?: string
+          popularity_score?: number
+          price_range?: string | null
+          year?: number | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          id: string
+          onboarded: boolean
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          onboarded?: boolean
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          id?: string
+          onboarded?: boolean
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_preferences: {
+        Row: {
+          created_at: string
+          disliked_note_ids: string[]
+          favorite_note_ids: string[]
+          gender_preference: string
+          id: string
+          preferred_families: string[]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          disliked_note_ids?: string[]
+          favorite_note_ids?: string[]
+          gender_preference?: string
+          id?: string
+          preferred_families?: string[]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          disliked_note_ids?: string[]
+          favorite_note_ids?: string[]
+          gender_preference?: string
+          id?: string
+          preferred_families?: string[]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
