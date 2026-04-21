@@ -1,6 +1,6 @@
 /** Tela inicial — Top Match + carrossel de lançamentos. */
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useAuthStore } from "@/lib/store";
 import { getRecommendations, getNewReleases } from "@/lib/recommendation.functions";
 import type { Perfume, RecommendedPerfume } from "@/lib/types";
