@@ -37,8 +37,14 @@ export const Route = createRootRoute({
       },
       { name: "theme-color", content: "#030712" },
       { property: "og:title", content: "PerfumeAI — Descubra o seu perfume ideal" },
-      { property: "og:description", content: "Recomendações de perfumes com IA, baseadas nas suas notas favoritas." },
+      { property: "og:description", content: "PerfumeMatch AI recommends personalized perfumes based on user preferences and scent profiles." },
       { property: "og:type", content: "website" },
+      { name: "twitter:title", content: "PerfumeAI — Descubra o seu perfume ideal" },
+      { name: "description", content: "PerfumeMatch AI recommends personalized perfumes based on user preferences and scent profiles." },
+      { name: "twitter:description", content: "PerfumeMatch AI recommends personalized perfumes based on user preferences and scent profiles." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/bb807966-49f4-4281-937d-39a1b8d27cd9/id-preview-efe5d561--d484028e-7674-4a20-9182-13bd11cc162e.lovable.app-1776792022396.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/bb807966-49f4-4281-937d-39a1b8d27cd9/id-preview-efe5d561--d484028e-7674-4a20-9182-13bd11cc162e.lovable.app-1776792022396.png" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
     links: [
       {
